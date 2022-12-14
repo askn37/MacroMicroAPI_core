@@ -103,9 +103,9 @@
   #define __PROGMEM_SIZE_ALIGN__ ".balign 32\n"
 #endif
 #define PAGE_ALIGN(sect) __asm__ __volatile__ ( \
-	".section " #sect "\n" \
-	__PROGMEM_SIZE_ALIGN__ \
-	".section \".text\"\n")
+  ".section " #sect "\n" \
+  __PROGMEM_SIZE_ALIGN__ \
+  ".section \".text\"\n")
 
 /* Import a binary file */
 #define IMPORT_BINFILE(sect, sym, file) asm (                             \
