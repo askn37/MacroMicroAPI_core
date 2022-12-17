@@ -15,7 +15,7 @@
 #include "Portmux.h"
 #include "UsartBaseClass.h"
 
-#define ENABLE_HarfUART_Class  1
+#define ENABLE_CLASS_HARFUART 1
 
 class HarfUART_Class : public UsartBaseClass {
 private:
