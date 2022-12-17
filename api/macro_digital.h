@@ -188,9 +188,9 @@
 #define VPORTDIR_18_250  do { __asm__ volatile ("CBI 0x00, 2"); PORTA_PIN2CTRL = PORT_PULLUPEN_bm; } while (0)
 #define VPORTDIR_19_250  do { __asm__ volatile ("CBI 0x00, 3"); PORTA_PIN3CTRL = PORT_PULLUPEN_bm; } while (0)
 #define VPORTDIR_20_250  do { __asm__ volatile ("CBI 0x00, 4"); PORTA_PIN4CTRL = PORT_PULLUPEN_bm; } while (0)
-#define VPORTDIR_21_250  do { __asm__ volatile ("CBI 0x00, 5"); PORTA_PIN4CTRL = PORT_PULLUPEN_bm; } while (0)
-#define VPORTDIR_22_250  do { __asm__ volatile ("CBI 0x00, 6"); PORTA_PIN5CTRL = PORT_PULLUPEN_bm; } while (0)
-#define VPORTDIR_23_250  do { __asm__ volatile ("CBI 0x00, 7"); PORTA_PIN6CTRL = PORT_PULLUPEN_bm; } while (0)
+#define VPORTDIR_21_250  do { __asm__ volatile ("CBI 0x00, 5"); PORTA_PIN5CTRL = PORT_PULLUPEN_bm; } while (0)
+#define VPORTDIR_22_250  do { __asm__ volatile ("CBI 0x00, 6"); PORTA_PIN6CTRL = PORT_PULLUPEN_bm; } while (0)
+#define VPORTDIR_23_250  do { __asm__ volatile ("CBI 0x00, 7"); PORTA_PIN7CTRL = PORT_PULLUPEN_bm; } while (0)
 
 #define VPORTDIR_48_250  do { __asm__ volatile ("CBI 0x04, 0"); PORTB_PIN0CTRL = PORT_PULLUPEN_bm; } while (0)
 #define VPORTDIR_49_250  do { __asm__ volatile ("CBI 0x04, 1"); PORTB_PIN1CTRL = PORT_PULLUPEN_bm; } while (0)
