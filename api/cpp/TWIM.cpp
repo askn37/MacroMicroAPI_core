@@ -35,8 +35,8 @@ TWIM_Class& TWIM_Class::initiate (const uint8_t _baudrate, bool _pullup) {
   TWIR->MCTRLA = TWI_ENABLE_bm | TWI_SMEN_bm;
   TWIR->MSTATUS = TWI_BUSSTATE_IDLE_gc;
   /* } */
-    scan(~0);
-    loop_until_is_idle();
+  scan(~0);
+  loop_until_is_idle();
   return *this;
 }
 
@@ -49,24 +49,24 @@ void TWIM_Class::end (void) {
 }
 
 bool TWIM_Class::scan (const uint8_t _addr) {
-    return (start(_addr).stop() & (TWI_BUSERR_bm | TWI_ARBLOST_bm | TWI_RXACK_bm)) == 0;
+  return (start(_addr).stop() & (TWI_BUSERR_bm | TWI_ARBLOST_bm | TWI_RXACK_bm)) == 0;
 }
 
 TWIM_Class& TWIM_Class::start (const uint8_t _addr, size_t _count) {
   if (TWIR->MSTATUS & TWI_BUSSTATE_1_bm) TWIR->MCTRLB = TWI_MCMD_STOP_gc;
   _read_count = 0;
-    _write_size = 0;
+  _write_size = 0;
   _write_count = _count;
   TWIR->MCTRLB = TWI_ACKACT_ACK_gc;
   TWIR->MSTATUS = TWI_RIF_bm | TWI_BUSERR_bm;
   TWIR->MADDR = (_addr << 1);
-    loop_until_is_write();
+  loop_until_is_write();
   return *this;
 }
 
 TWIM_Class& TWIM_Class::request (const uint8_t _addr, size_t _count) {
   _write_count = 0;
-    _read_size = 0;
+  _read_size = 0;
   _read_count = _count;
   TWIR->MCTRLB = TWI_ACKACT_ACK_gc;
   TWIR->MSTATUS = TWI_RIF_bm | TWI_BUSERR_bm;
@@ -75,7 +75,7 @@ TWIM_Class& TWIM_Class::request (const uint8_t _addr, size_t _count) {
 }
 
 uint8_t TWIM_Class::stop (void) {
-    uint8_t _stat = TWIR->MSTATUS;
+  uint8_t _stat = TWIR->MSTATUS;
   if (_stat & TWI_BUSSTATE_1_bm) TWIR->MCTRLB = TWI_MCMD_STOP_gc;
   return _stat;
 }

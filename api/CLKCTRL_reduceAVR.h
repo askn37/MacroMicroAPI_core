@@ -14,8 +14,8 @@
 #undef _CLKCTRL_PDIV_
 
 #if !defined(F_CPU)
-    #define F_CPU 1000000L
-    #warning F_CPU is undefined so assume 1000000L
+  #define F_CPU 1000000L
+  #warning F_CPU is undefined so assume 1000000L
 #endif
 
 extern inline void _CLKCTRL_SETUP (void) {

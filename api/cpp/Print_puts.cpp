@@ -63,45 +63,45 @@ size_t Print::puts (const PGM_t _str[]) {
  */
 
 uint8_t _read (uint32_t _addr, bool _prog) {
-    return _prog ? pgm_read_byte(_addr) : *((uint8_t*)_addr);
+  return _prog ? pgm_read_byte(_addr) : *((uint8_t*)_addr);
 }
 
 Print& Print::_print_hex (Print_OPT_HEX_t p) {
-    size_t _count = 0;
+  size_t _count = 0;
   while (p.length--) {
     uint8_t _c = _read(p.addr++, p.prog);
     write(btoh(__builtin_avr_swap(_c)));
     write(btoh(_c));
-        if (p.length) {
-          if (++_count == p.wrap) { puts(p.split); _count -= p.wrap; }
+    if (p.length) {
+      if (++_count == p.wrap) { puts(p.split); _count -= p.wrap; }
       else if (p.sep) write(p.sep);
-        }
+    }
   }
   return *this;
 }
 
 Print& Print::printHex (const void* _source, size_t _length, char _separator, size_t _wrap, const char* _split) {
-    Print_OPT_HEX_t p = {
-        (uint32_t)_source
-    , _split
-    , _length
-    , _wrap
-    , _separator
-    , false
-    };
-    return _print_hex(p);
+  Print_OPT_HEX_t p = {
+    (uint32_t)_source
+  , _split
+  , _length
+  , _wrap
+  , _separator
+  , false
+  };
+  return _print_hex(p);
 }
 
 Print& Print::printHex (const PGM_t* _source, size_t _length, char _separator, size_t _wrap, const char* _split) {
-    Print_OPT_HEX_t p = {
-        (uint32_t)_source
-    , _split
-    , _length
-    , _wrap
-    , _separator
-    , true
-    };
-    return _print_hex(p);
+  Print_OPT_HEX_t p = {
+    (uint32_t)_source
+  , _split
+  , _length
+  , _wrap
+  , _separator
+  , true
+  };
+  return _print_hex(p);
 }
 
 /* Binary Dump */
@@ -109,23 +109,23 @@ Print& Print::printHex (const PGM_t* _source, size_t _length, char _separator, s
 Print& Print::_print_dump (Print_OPT_HEX_t p, bool _utf) {
   while (p.length > 0) {
     print(p.addr, ZFILL|HEX, 5);
-        print(F(": "));
-        Print_OPT_HEX_t r = {
-            p.addr
-        , "  "
-        , (p.length > 16 ? 16 : p.length)
-        , 8
-        , ' '
-        , p.prog
-        };
-        _print_hex(r);
-        if (p.length < 16) {
+      print(F(": "));
+      Print_OPT_HEX_t r = {
+      p.addr
+      , "  "
+      , (p.length > 16 ? 16 : p.length)
+      , 8
+      , ' '
+      , p.prog
+      };
+      _print_hex(r);
+      if (p.length < 16) {
       if (p.length < 8) write(' ');
       for (int j = p.length; j < 16; j++) print(F("   "));
-        }
+    }
     print(F("  "));
     uint32_t q = p.addr;
-        int s = p.length < 16 ? p.length : 16;
+    int s = p.length < 16 ? p.length : 16;
     for (int j = 0; j < s; j++) {
       uint8_t c = _read(q++, p.prog);
 
@@ -157,39 +157,39 @@ Print& Print::_print_dump (Print_OPT_HEX_t p, bool _utf) {
       /* Other */
       else write('.');
     }
-        if (p.length < 16) {
-            ln();
-            break;
-        }
+    if (p.length < 16) {
+        ln();
+        break;
+    }
     p.length -= 16;
     p.addr += 16;
     ln();
-    }
-    return *this;
+  }
+  return *this;
 }
 
 Print& Print::printDump (const void* _source, size_t _length, bool _utf) {
-    Print_OPT_HEX_t p = {
-        (uint32_t)_source
-    , 0
-    , _length
-    , 0
-    , 0
-    , false
-    };
-    return _print_dump(p, _utf);
+  Print_OPT_HEX_t p = {
+  (uint32_t)_source
+  , 0
+  , _length
+  , 0
+  , 0
+  , false
+  };
+  return _print_dump(p, _utf);
 }
 
 Print& Print::printDump (const PGM_t* _source, size_t _length, bool _utf) {
-    Print_OPT_HEX_t p = {
-        (uint32_t)_source
-    , 0
-    , _length
-    , 0
-    , 0
-    , true
-    };
-    return _print_dump(p, _utf);
+  Print_OPT_HEX_t p = {
+  (uint32_t)_source
+  , 0
+  , _length
+  , 0
+  , 0
+  , true
+  };
+  return _print_dump(p, _utf);
 }
 
 // end of code
