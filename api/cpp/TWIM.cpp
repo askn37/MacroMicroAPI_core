@@ -84,7 +84,10 @@ size_t TWIM_Class::write (const uint8_t _c) {
   if ((_write_count == 0) || is_fail()) return 0;
   loop_until_is_write();
   TWIR->MDATA = _c;
-  if (--_write_count == 0) TWIR->MCTRLB = TWI_MCMD_STOP_gc;
+  if (--_write_count == 0) {
+    loop_until_is_write();
+    TWIR->MCTRLB = TWI_MCMD_STOP_gc;
+  }
   return 1;
 }
 
