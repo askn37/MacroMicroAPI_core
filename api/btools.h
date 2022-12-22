@@ -53,7 +53,7 @@ extern uint8_t crc8 (void* _data, size_t _len);           /* SMBus PEC */
 extern uint8_t crc8_ccitt (void* _data, size_t _len);
 extern uint8_t crc8_ibutton (void* _data, size_t _len);   /* Dallas (Maxim) iButton 8-bit */
 
-extern uint8_t crc8_dallas (void* _data, size_t _len);	  /* Dallas 1-Wire SENSIRON SH3x */
+extern uint8_t crc8_dallas (void* _data, size_t _len);    /* Dallas 1-Wire SENSIRON SH3x */
 extern uint8_t _crc_dallas_update (uint8_t _crc, uint8_t _data);
 
 extern uint16_t crc16 (void* _data, size_t _len);
