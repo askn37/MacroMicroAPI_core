@@ -32,7 +32,7 @@ int UsartBaseClass::read (void) {
 size_t UsartBaseClass::readBytes (void* _buffer, size_t _limit, char _terminate, uint8_t _swevent) {
   size_t _length = 0;
   do {
-    uint16_t _busy = (usart->BAUD) >> 1;
+    uint16_t _busy = usart->BAUD;
     while (bit_is_clear(usart->STATUS, USART_RXCIF_bp)) {
       if (--_busy == 0) return _length;
     }
@@ -43,6 +43,7 @@ size_t UsartBaseClass::readBytes (void* _buffer, size_t _limit, char _terminate,
   #elif defined(EVSYS_ASYNCSTROBE)
     EVSYS_ASYNCSTROBE = _swevent;
   #endif
+    _swevent = 0;
     int _c = read();
     if (_c >= 0) {
       ((uint8_t*)_buffer)[_length++] = (uint8_t)_c;
