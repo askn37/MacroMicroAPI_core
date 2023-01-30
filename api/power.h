@@ -15,6 +15,8 @@
 extern "C" {
 #endif
 
+extern void power_halt (const uint8_t mode);
+
 #define power_down()    power_halt(SLEEP_MODE_PWR_DOWN)
 #define power_idle()    power_halt(SLEEP_MODE_IDLE)
 #define power_standby() power_halt(SLEEP_MODE_STANDBY)
@@ -24,14 +26,6 @@ extern "C" {
 #else
 #define power_adc()     power_halt(SLEEP_MODE_IDLE) /* legacy compatible */
 #endif
-
-void power_halt (const uint8_t mode) {
-  set_sleep_mode(mode);
-  sleep_enable();
-  __builtin_avr_sei();
-  sleep_cpu();
-  sleep_disable();
-}
 
 #ifdef __cplusplus
 }
