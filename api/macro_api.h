@@ -61,6 +61,14 @@
   #define delayMicroseconds(_US) delay_micros(_US)
 #endif
 
+#if !defined(nop) && !defined(DISABLE_ALIAS_NOP)
+  #define nop() __builtin_avr_nop()
+#endif
+
+#if !defined(wdt_reset) && !defined(DISABLE_ALIAS_WDR_RESET)
+  #define wdt_reset() __builtin_avr_wdr()
+#endif
+
 #endif  /* ENABLE_MACRO_API */
 
 // end of code
