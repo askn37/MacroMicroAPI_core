@@ -9,6 +9,7 @@
  *
  */
 #include <avr/sleep.h>
+#include <api/power.h>
 
 void power_halt (const uint8_t mode) {
   set_sleep_mode(mode);

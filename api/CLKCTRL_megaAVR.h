@@ -141,8 +141,9 @@ extern inline void _CLKCTRL_SETUP (void) {
 
 #undef _CLKCTRL_PDIV_
 
-#else
-#assert This ARCHITECTURE not supported
-#endif
+#else  /* !defined(CLKCTRL_AUTOTUNE_bm) */
+#error This ARCHITECTURE not supported
+#include BUILD_STOP
+#endif /* defined(CLKCTRL_AUTOTUNE_bm) */
 
 // end of code
