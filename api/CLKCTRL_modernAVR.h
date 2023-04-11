@@ -324,14 +324,14 @@ extern inline void _CLKCTRL_SETUP (void) {
  *
  * CLK_MAIN :
  *
- *   CLKCTRL_CLKSEL_OSC20M_gc     20 MHz or 16 MHz
- *     (check is FUSE.OSCCFG -> FUSE_FREQSEL_gm)
+ *   CLKCTRL_CLKSEL_OSCHF_gc     20 MHz or 16 MHz
+ *     (check is FUSE.OSCCFG -> FUSE_OSCHFFRQ_bp)
  *
  *   CLKCTRL_CLKSEL_OSCULP32K_gc  32.768 kHz
  *
  * Prescaler Division :
  *
- *   CLKCTRL_PDIV_*X_gc           2,4,8,16,32,64,
+ *   CLKCTRL_PDIV_DIV*_gc         2,4,8,16,32,64,
  *                                6,12,24,48, 10
  */
 
