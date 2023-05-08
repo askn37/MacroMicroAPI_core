@@ -11,7 +11,7 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
   - megaAVR-0系統
   - tinyAVR-0/1/2系統
 - modernAVR世代
-  - AVR Dx系統
+  - AVR DA/DB/DD/EA系統
 - reduceAVR世代
   - TPI対応系統
 
