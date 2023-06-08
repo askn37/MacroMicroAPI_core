@@ -12,6 +12,7 @@
 
 #include "../TWIM.h"
 #include <avr/pgmspace.h>
+#include <api/delay_busywait.h>
 
 TWIM_Class& TWIM_Class::initiate (const uint8_t _baudrate, bool _pullup) {
   uint8_t _portp = PORT_ISC_INTDISABLE_gc;
@@ -25,18 +26,23 @@ TWIM_Class& TWIM_Class::initiate (const uint8_t _baudrate, bool _pullup) {
   (*(register8_t*)pgm_read_ptr(&portmux->scl_pin_ctrl)) = _portp;
   PORT_t* _portx = (PORT_t*)pgm_read_ptr(&portmux->port_reg);
   uint8_t _scl_bm = pgm_read_byte(&portmux->scl_pin);
-  _portx->DIRCLR = pgm_read_byte(&portmux->sda_pin);
-  _portx->OUTCLR = _scl_bm;
-    uint8_t _count = 0;
-  do { _portx->DIRTGL = _scl_bm; __builtin_avr_nops(1); } while (--_count);
+  uint8_t _sda_bm = pgm_read_byte(&portmux->sda_pin);
+  _portx->DIRCLR = _scl_bm | _sda_bm;
+  _portx->OUTCLR = _scl_bm | _sda_bm;
+  for (uint8_t i = 0; i < 20; i++) {
+    delay_micros(5);
+    _portx->DIRTGL = _scl_bm;
+    delay_micros(5);
+    _portx->DIRTGL = _sda_bm;
+  }
   /* ATOMIC_BLOCK(ATOMIC_RESTORESTATE) { */
   TWIR->MBAUD = _baudrate;
   TWIR->MCTRLB = TWI_ACKACT_ACK_gc;
   TWIR->MCTRLA = TWI_ENABLE_bm | TWI_SMEN_bm;
   TWIR->MSTATUS = TWI_BUSSTATE_IDLE_gc;
   /* } */
-  scan(~0);
-  loop_until_is_idle();
+  // scan(~0);
+  // loop_until_is_idle();
   return *this;
 }
 
