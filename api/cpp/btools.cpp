@@ -185,6 +185,14 @@ uint16_t crc16_xmodem (void* _data, size_t _len) {
   return _crc;
 }
 
+/* x16 + x12 + x5 + 1 (0x1021) init -1 */
+uint16_t crc16_ccitt_false (void* _data, size_t _len) {
+  uint16_t _crc = ~0;
+  uint8_t* _p = (uint8_t*)_data;
+  while (_len--) _crc = _crc_xmodem_update(_crc, *_p++);
+  return _crc;
+}
+
 /* x32 + x26 + x23 + x22 + x16 + x12 + x11 + x10 + x8 + x7 + x5 + x4 + x2 + x + 1 */
 /* (0xEDB88320 rev) init -1 */
 uint32_t _crc32_update (uint32_t _crc, uint8_t _data) {

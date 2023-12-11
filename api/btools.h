@@ -59,6 +59,7 @@ extern uint8_t _crc_dallas_update (uint8_t _crc, uint8_t _data);
 extern uint16_t crc16 (void* _data, size_t _len);
 extern uint16_t crc16_ccitt (void* _data, size_t _len);
 extern uint16_t crc16_xmodem (void* _data, size_t _len);
+extern uint16_t crc16_ccitt_false (void* _data, size_t _len);
 
 extern uint32_t crc32 (void* _data, size_t _len);
 extern uint32_t _crc32_update (uint32_t _crc, uint8_t _data);
