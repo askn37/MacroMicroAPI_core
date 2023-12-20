@@ -2,10 +2,10 @@
  * @file HarfUART.cpp
  * @author askn (K.Sato) multix.jp
  * @brief Half Duplex Universal Asynchronous Receiver/Transmitter Easy Class (method)
- * @version 0.1
- * @date 2022-09-21
+ * @version 0.2
+ * @date 2023-12-20
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2023 askn37 at github.com
  *
  */
 #if !defined(__AVR_TINY__)
@@ -21,31 +21,32 @@ HarfUART_Class& HarfUART_Class::initiate (const uint16_t _baudrate) {
     _baud2x = 1;
     _usart_ctrl_b = USART_RXEN_bm | USART_TXEN_bm | USART_RXMODE_CLK2X_gc;
   }
-  register8_t *_portmux = (register8_t*)pgm_read_ptr(&portmux->portmux_reg);
-  *_portmux = (*_portmux & pgm_read_byte(&portmux->portmux_mask))
-                         | pgm_read_byte(&portmux->portmux_set);
-  PORT_t *_port = pgm_read_ptr(&portmux->port_reg);
-  _port->DIRSET = pgm_read_byte(&portmux->tx_pin);
-  _port->DIRCLR = pgm_read_byte(&portmux->rx_pin);
-  (*(register8_t*)pgm_read_ptr(&portmux->rx_pin_ctrl)) = PORT_PULLUPEN_bm
-                                                       | PORT_ISC_INTDISABLE_gc;
-// ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
-  usart->BAUD = (_baudrate << _baud2x);
-  usart->CTRLA = 0;
-  usart->CTRLC = USART_CHSIZE_8BIT_gc
-               | USART_PMODE_DISABLED_gc
-               | USART_CMODE_ASYNCHRONOUS_gc
-               | USART_SBMODE_1BIT_gc;
-  usart->CTRLB = _usart_ctrl_b;
-// }
+  const UART_portmux_t* _mux = portmux;
+  register8_t *_portmux = (register8_t*)pgm_read_ptr(&_mux->portmux_reg);
+  *_portmux = (*_portmux & pgm_read_byte(&_mux->portmux_mask))
+                         | pgm_read_byte(&_mux->portmux_set);
+  PORT_t *_port = pgm_read_ptr(&_mux->port_reg);
+  _port->DIRSET = pgm_read_byte(&_mux->tx_pin);
+  _port->DIRCLR = pgm_read_byte(&_mux->rx_pin);
+  (*(register8_t*)pgm_read_ptr(&_mux->rx_pin_ctrl)) = PORT_PULLUPEN_bm
+                                                    | PORT_ISC_INTDISABLE_gc;
+  USART_t* _usart = usart;
+  _usart->BAUD = (_baudrate << _baud2x);
+  _usart->CTRLA = 0;
+  _usart->CTRLC = USART_CHSIZE_8BIT_gc
+                | USART_PMODE_DISABLED_gc
+                | USART_CMODE_ASYNCHRONOUS_gc
+                | USART_SBMODE_1BIT_gc;
+  _usart->CTRLB = _usart_ctrl_b;
   return *this;
 }
 
 void HarfUART_Class::end (void) {
   flush();
+  const UART_portmux_t* _mux = portmux;
   usart->CTRLB = 0;
-  (*(PORT_t*)pgm_read_ptr(&portmux->port_reg)).DIRCLR = pgm_read_byte(&portmux->tx_pin);
-  (*(register8_t*)pgm_read_ptr(&portmux->rx_pin_ctrl)) = PORT_ISC_INPUT_DISABLE_gc;
+  (*(PORT_t*)pgm_read_ptr(&_mux->port_reg)).DIRCLR = pgm_read_byte(&_mux->tx_pin);
+  (*(register8_t*)pgm_read_ptr(&_mux->rx_pin_ctrl)) = PORT_ISC_INPUT_DISABLE_gc;
 }
 
 #endif

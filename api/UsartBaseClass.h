@@ -2,10 +2,10 @@
  * @file UsartBaseClass.h
  * @author askn (K.Sato) multix.jp
  * @brief Half Duplex Universal Asynchronous/Synchronous Receiver/Transmitter Base Class
- * @version 0.1
- * @date 2022-09-21
+ * @version 0.2
+ * @date 2022-12-20
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2023 askn37 at github.com
  *
  */
 #pragma once
@@ -42,6 +42,7 @@ public:
   inline int peek (void) { return ~0; }
 
   inline uint16_t is_baud (void) { return usart->BAUD; }
+  inline uint8_t status (void) { return rxdh; }
 
   size_t readBytes (void* _buffer, size_t _limit, char _terminate = 0, uint8_t _swevent = 0);
 };
