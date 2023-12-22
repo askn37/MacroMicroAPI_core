@@ -11,7 +11,7 @@
 #pragma once
 #include <avr/io.h>
 
-#if defined(CLKCTRL_AUTOTUNE_bm)
+#if defined(CLKCTRL_AUTOTUNE_bm) || defined(USB0_BUSEVENT_vect_num)
 /*******************************************************
  *
  * AVR Dx Production Internal Clock Speed Setup
@@ -43,6 +43,7 @@
 
 extern inline void _CLKCTRL_SETUP (void) {
 
+#ifndef USB0_BUSEVENT_vect_num
 /* experimental overclock frequency */
 #ifndef CLKCTRL_FRQSEL_28M_gc
 #define CLKCTRL_FRQSEL_28M_gc (0x0A<<2)
@@ -51,6 +52,7 @@ extern inline void _CLKCTRL_SETUP (void) {
 #ifndef CLKCTRL_FRQSEL_32M_gc
 #define CLKCTRL_FRQSEL_32M_gc (0x0B<<2)
 #endif
+#endif /* USB0_BUSEVENT_vect_num */
 
 /*
  * Other select
