@@ -18,7 +18,7 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
 ## パス配置
 
 このモジュールは __Arduino IDE__ の
-```boards.txt/platform.txt```において
+`boards.txt/platform.txt`において
 以下のパスに配置される。
 
 ```plain
@@ -33,6 +33,7 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
 |名称|機能|C|mega|modern|reduce|
 |-|-|-|-|-|-|
 |Arduino.h|API種別選択ヘッダ||✓|✓|✓
+|new.h|C++ new/delete||✓|✓|
 |_api/_|
 |CLKCTRL_megaAVR.h|F_CPU初期化支援（megaAVR/tinyAVR）|✓|✓
 |CLKCTRL_modernAVR.h|F_CPU初期化支援（modernAVR）|✓||✓
@@ -52,6 +53,7 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
 
 > Cカテゴリは純粋C言語環境でも機能する。\
 > reduceAVR の macro_digital 機能は variants パスに配置。
+> *new.h* は malloc/free ライブラリを結合する。コード空間を約1KiB消費。
 
 ## 著作表示
 
