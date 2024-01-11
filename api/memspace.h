@@ -23,6 +23,11 @@
 #define NIMEM __attribute__ ((section (".noinit")))
 #define ROMEM __attribute__ ((section (".progmem.nvm")))
 #define NVMEM __attribute__ ((section (".nvmem")))
+#define CODEMEM __attribute__ ((section (".text")))
+#define DATAMEM __attribute__ ((section (".data")))
+#define PRODSIG __attribute__ ((section (".signature")))
+#define USERSIG __attribute__ ((section (".user_signatures")))
+#define BOOTSIG __attribute__ ((section (".boot_signatures")))
 
 #define PGM_ALIGN alignas(PROGMEM_PAGE_SIZE)
 
