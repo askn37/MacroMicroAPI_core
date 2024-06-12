@@ -108,10 +108,10 @@ Print& Print::printHex (const PGM_t* _source, size_t _length, char _separator, s
 
 Print& Print::_print_dump (Print_OPT_HEX_t p, bool _utf) {
   while (p.length > 0) {
-    print(p.addr, ZFILL|HEX, 5);
+    print(p.addr, ZFILL|HEX, 8);
       print(F(": "));
       Print_OPT_HEX_t r = {
-      p.addr
+        p.addr
       , "  "
       , (p.length > 16 ? 16 : p.length)
       , 8
@@ -120,9 +120,9 @@ Print& Print::_print_dump (Print_OPT_HEX_t p, bool _utf) {
       };
       _print_hex(r);
       if (p.length < 16) {
-      if (p.length < 8) write(' ');
-      for (int j = p.length; j < 16; j++) print(F("   "));
-    }
+        if (p.length < 8) write(' ');
+        for (int j = p.length; j < 16; j++) print(F(" .."));
+      }
     print(F("  "));
     uint32_t q = p.addr;
     int s = p.length < 16 ? p.length : 16;
@@ -158,8 +158,8 @@ Print& Print::_print_dump (Print_OPT_HEX_t p, bool _utf) {
       else write('.');
     }
     if (p.length < 16) {
-        ln();
-        break;
+      ln();
+      break;
     }
     p.length -= 16;
     p.addr += 16;
@@ -170,7 +170,7 @@ Print& Print::_print_dump (Print_OPT_HEX_t p, bool _utf) {
 
 Print& Print::printDump (const void* _source, size_t _length, bool _utf) {
   Print_OPT_HEX_t p = {
-  (uint32_t)_source
+    (uint32_t)_source
   , 0
   , _length
   , 0
@@ -182,7 +182,7 @@ Print& Print::printDump (const void* _source, size_t _length, bool _utf) {
 
 Print& Print::printDump (const PGM_t* _source, size_t _length, bool _utf) {
   Print_OPT_HEX_t p = {
-  (uint32_t)_source
+    (uint32_t)_source
   , 0
   , _length
   , 0
