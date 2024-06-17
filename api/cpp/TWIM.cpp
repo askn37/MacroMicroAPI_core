@@ -5,9 +5,11 @@
  * @version 0.1
  * @date 2022-09-21
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2024 askn37 at github.com
  *
  */
+// MIT License : https://askn37.github.io/LICENSE.html
+
 #if !defined(__AVR_TINY__)
 
 #include "../TWIM.h"
@@ -86,7 +88,7 @@ uint8_t TWIM_Class::stop (void) {
   return _stat;
 }
 
-size_t TWIM_Class::write (const uint8_t _c) {
+size_t TWIM_Class::write_byte (const uint8_t _c) {
   if ((_write_count == 0) || is_fail()) return 0;
   loop_until_is_write();
   TWIR->MDATA = _c;
@@ -97,19 +99,19 @@ size_t TWIM_Class::write (const uint8_t _c) {
   return 1;
 }
 
-int TWIM_Class::read (void) {
+int TWIM_Class::read_byte (void) {
   if ((_read_count == 0) || is_fail()) return ~0;
   loop_until_is_read();
   if (--_read_count == 0) TWIR->MCTRLB = TWI_MCMD_STOP_gc | TWI_ACKACT_NACK_gc;
   return _last_rx = TWIR->MDATA;
 }
 
-size_t TWIM_Class::read (void* _buff, size_t _length) {
+size_t TWIM_Class::read_bytes (void* _buff, size_t _length) {
   size_t _count = 0;
   uint8_t* _ptr = (uint8_t*)_buff;
   int _c;
   while (_length--) {
-    if ((_c = read()) < 0) break;
+    if ((_c = read_byte()) < 0) break;
     *(_ptr++) = (uint8_t) _c;
     _count++;
   }
@@ -121,7 +123,7 @@ size_t TWIM_Class::reverse_read (void* _buff, size_t _length) {
   uint8_t* _ptr = (uint8_t*)_buff;
   int _c;
   while (_length) {
-    if ((_c = read()) < 0) break;
+    if ((_c = read_byte()) < 0) break;
     _ptr[--_length] = (uint8_t) _c;
     _count++;
   };

@@ -55,6 +55,11 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
 > Cカテゴリは純粋C言語環境でも機能する。\
 > reduceAVR の macro_digital 機能は variants パスに配置。
 
+## 更新履歴
+
+- 0.2.14 (24/06/17)
+  - 各ファイルの MITライセンスリンク対応
+
 ## 著作表示
 
 Twitter: [@askn37](https://twitter.com/askn37) \

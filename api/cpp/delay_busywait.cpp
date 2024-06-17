@@ -5,9 +5,11 @@
  * @version 0.1
  * @date 2022-09-21
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2024 askn37 at github.com
  *
  */
+// MIT License : https://askn37.github.io/LICENSE.html
+
 #include "../delay_busywait.h"
 
 void _busy_loop_3_8 (uint8_t _count) {

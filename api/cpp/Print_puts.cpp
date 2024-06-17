@@ -5,9 +5,11 @@
  * @version 0.1
  * @date 2022-09-21
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2024 askn37 at github.com
  *
  */
+// MIT License : https://askn37.github.io/LICENSE.html
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "../Print.h"
@@ -120,8 +122,8 @@ Print& Print::_print_dump (Print_OPT_HEX_t p, bool _utf) {
       };
       _print_hex(r);
       if (p.length < 16) {
-        if (p.length < 8) write(' ');
-        for (int j = p.length; j < 16; j++) print(F(" .."));
+        if (p.length <= 8) write(' ');
+        for (int j = p.length; j < 16; j++) print(F("   "));
       }
     print(F("  "));
     uint32_t q = p.addr;

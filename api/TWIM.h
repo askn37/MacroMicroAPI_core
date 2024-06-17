@@ -5,9 +5,11 @@
  * @version 0.1
  * @date 2022-09-21
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2024 askn37 at github.com
  *
  */
+// MIT License : https://askn37.github.io/LICENSE.html
+
 #pragma once
 #include <avr/io.h>
 #if defined(__cplusplus) && !defined(__AVR_TINY__)
@@ -41,13 +43,14 @@ public:
   TWIM_Class& request (const uint8_t _addr, size_t _count);
   uint8_t stop (void);
 
+  size_t write_byte (const uint8_t _c);
 
-  size_t write (const uint8_t _c);
+  size_t write (const uint8_t _c) { return write_byte(_c); }
   using Print::write; // pull in write(str) and write(buf, size) from Print
 
-  inline TWIM_Class& send (const char _c) { _write_size += write((uint8_t)_c); return *this; }
-  inline TWIM_Class& send (const int _c) { _write_size += write((uint8_t)_c); return *this; }
-  inline TWIM_Class& send (const long _c) { _write_size += write((uint8_t)_c); return *this; }
+  inline TWIM_Class& send (const char _c) { _write_size += write_byte((uint8_t)_c); return *this; }
+  inline TWIM_Class& send (const int _c) { _write_size += write_byte((uint8_t)_c); return *this; }
+  inline TWIM_Class& send (const long _c) { _write_size += write_byte((uint8_t)_c); return *this; }
   inline TWIM_Class& send (const uint8_t* _buffer, size_t _length) {
     _write_size += write(_buffer, _length);
     return *this;
@@ -57,7 +60,10 @@ public:
     return *this;
   }
 
-  int read (void);
+  int read_byte (void);
+  size_t read_bytes (void* _buff, size_t _length);
+
+  int read (void) { return read_byte(); }
   inline void flush (void) {}
 
   inline uint8_t last_read (void) { return _last_rx; }
@@ -73,12 +79,12 @@ public:
   /* replace gets(char*) */
   size_t read (void* _buff, size_t _length);
   inline TWIM_Class& recv (void* _buff, size_t _length) {
-    _read_size += read (_buff, _length);
+    _read_size += read_bytes(_buff, _length);
     return *this;
   }
   size_t reverse_read (void* _buff, size_t _length);
   inline TWIM_Class& reverse_recv (void* _buff, size_t _length) {
-    _read_size += reverse_read (_buff, _length);
+    _read_size += reverse_read(_buff, _length);
     return *this;
   }
 

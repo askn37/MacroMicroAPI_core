@@ -5,9 +5,11 @@
  * @version 0.1
  * @date 2022-09-21
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2024 askn37 at github.com
  *
  */
+// MIT License : https://askn37.github.io/LICENSE.html
+
 #include "../Print.h"
 
 Print& Print::_print_integer (uint32_t _number, uint8_t _base, int8_t _direction, int8_t _offset) {
