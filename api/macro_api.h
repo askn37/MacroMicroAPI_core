@@ -18,9 +18,9 @@
 #include <avr/pgmspace.h>
 #include <avr/sleep.h>
 #include <util/atomic.h>
-#include <api/btools.h>
 #include <inttypes.h>
 #include <stdbool.h>
+#include <api/btools.h>
 #include <api/delay_busywait.h>
 #include <api/macro_digital.h>
 #include <api/memspace.h>
@@ -69,6 +69,14 @@
 
 #if !defined(wdt_reset) && !defined(DISABLE_ALIAS_WDR_RESET)
   #define wdt_reset() __builtin_avr_wdr()
+#endif
+
+#if !defined(bit_set) && !defined(DISABLE_ALIAS_BIT_SET)
+  #define bit_set(sfr,bit) ((sfr) |= _BV(bit))
+#endif
+
+#if !defined(bit_clear) && !defined(DISABLE_ALIAS_BIT_CLEAR)
+  #define bit_clear(sfr,bit) ((sfr) &= ~_BV(bit))
 #endif
 
 #endif  /* ENABLE_MACRO_API */
