@@ -25,8 +25,8 @@ class TWIM_Class : public Print {
 private:
   TWI_t* TWIR;
   const TWI_portmux_t* portmux;
-  size_t _read_count, _read_size, _write_count, _write_size;
-  uint8_t _last_rx;
+  size_t _read_count = 0, _read_size = 0, _write_count = 0, _write_size = 0;
+  uint8_t _last_rx = 0;
 
 public:
   inline TWIM_Class (TWI_t* _twi, const TWI_portmux_t* _portmux) : TWIR(_twi), portmux(_portmux) {}
@@ -115,7 +115,7 @@ public:
 
   /* Wire class compatible methods */
   inline void setClock (uint32_t /*frequency*/ ) {}
-  inline void beginTransmission (uint8_t address) { start((const uint8_t)address); }
+  inline void beginTransmission (uint8_t address) { start(address); }
   inline uint8_t endTransmission (bool sendStop = true) { if (sendStop) stop(); return 0; }
   inline uint8_t requestFrom (uint8_t address, size_t quantity, bool /* sendStop */ = true) {
     request(address, quantity);

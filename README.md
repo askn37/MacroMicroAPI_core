@@ -11,7 +11,8 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
   - megaAVR-0系統
   - tinyAVR-0/1/2系統
 - modernAVR世代
-  - AVR DA/DB/DD/EA系統
+  - AVR Dx系統
+  - AVR Ex系統
 - reduceAVR世代
   - TPI対応系統
 
@@ -56,6 +57,11 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
 > reduceAVR の macro_digital 機能は variants パスに配置。
 
 ## 更新履歴
+
+- 0.4.0 (26/07/05)
+  - ドキュメント更新
+  - ビルド警告除去: TWIM.h
+  - 上位実装（modernAVR等）の更新に伴うバージョン番号の変更
 
 - 0.2.14 (24/06/17)
   - 各ファイルの MITライセンスリンク対応

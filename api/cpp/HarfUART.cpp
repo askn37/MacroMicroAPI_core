@@ -35,10 +35,10 @@ HarfUART_Class& HarfUART_Class::initiate (const uint16_t _baudrate) {
   USART_t* _usart = usart;
   _usart->BAUD = (_baudrate << _baud2x);
   _usart->CTRLA = 0;
-  _usart->CTRLC = USART_CHSIZE_8BIT_gc
-                | USART_PMODE_DISABLED_gc
-                | USART_CMODE_ASYNCHRONOUS_gc
-                | USART_SBMODE_1BIT_gc;
+  _usart->CTRLC =+ USART_CHSIZE_8BIT_gc
+                 | USART_PMODE_DISABLED_gc
+                 | USART_CMODE_ASYNCHRONOUS_gc
+                 | USART_SBMODE_1BIT_gc;
   _usart->CTRLB = _usart_ctrl_b;
   return *this;
 }

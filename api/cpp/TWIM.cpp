@@ -102,7 +102,7 @@ size_t TWIM_Class::write_byte (const uint8_t _c) {
 int TWIM_Class::read_byte (void) {
   if ((_read_count == 0) || is_fail()) return ~0;
   loop_until_is_read();
-  if (--_read_count == 0) TWIR->MCTRLB = TWI_MCMD_STOP_gc | TWI_ACKACT_NACK_gc;
+  if (--_read_count == 0) TWIR->MCTRLB =+ TWI_MCMD_STOP_gc | TWI_ACKACT_NACK_gc;
   return _last_rx = TWIR->MDATA;
 }
 
