@@ -18,6 +18,7 @@ extern "C" {
 #endif
 
 extern void power_halt (const uint8_t mode);
+extern void reboot (void);
 
 #define power_down()    power_halt(SLEEP_MODE_PWR_DOWN)
 #define power_idle()    power_halt(SLEEP_MODE_IDLE)

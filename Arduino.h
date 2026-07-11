@@ -22,9 +22,14 @@ extern "C" {
 extern void yield (void);
 extern void setup (void);
 extern void loop (void);
+extern void reboot (void);
 
 #ifdef __cplusplus
 } // extern "C"
+#endif
+
+#if defined(ENABLE_USBLOADER)
+#include <SerialUSB.h>
 #endif
 
 #endif  /* ENABLE_MACRO_API */
