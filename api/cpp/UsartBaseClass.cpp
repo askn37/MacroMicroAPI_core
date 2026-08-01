@@ -15,19 +15,32 @@
 #include "../UsartBaseClass.h"
 
 size_t UsartBaseClass::write (const uint8_t _c) {
+#if defined(AVR_AVRLX)
+  loop_until_bit_is_set(usart->INTFLAGS, USART_DRE_bp);
+  usart->INTFLAGS = USART_TXC_bm;
+#else
   loop_until_bit_is_set(usart->STATUS, USART_DREIF_bp);
   usart->STATUS = USART_TXCIF_bm;
+#endif
   usart->TXDATAL = _c;
   return 1;
 }
 
 int UsartBaseClass::read (void) {
   int _rxd = ~0;
+#if defined(AVR_AVRLX)
+  if (bit_is_set(usart->INTFLAGS, USART_RXC_bp)) {
+    rxdh = usart->RXDATAH;
+    uint8_t rxdl = usart->RXDATAL;
+    if (!(rxdh & (USART_FERR_bm | USART_BUFOVF_bm | USART_PERR_bm ))) _rxd = rxdl;
+  }
+#else
   if (bit_is_set(usart->STATUS, USART_RXCIF_bp)) {
     rxdh = usart->RXDATAH;
     uint8_t rxdl = usart->RXDATAL;
-    if (!(rxdh & (USART_FERR_bp | USART_BUFOVF_bm | USART_PERR_bm ))) _rxd = rxdl;
+    if (!(rxdh & (USART_FERR_bm | USART_BUFOVF_bm | USART_PERR_bm ))) _rxd = rxdl;
   }
+#endif
   return _rxd;
 }
 
@@ -35,7 +48,13 @@ size_t UsartBaseClass::readBytes (void* _buffer, size_t _limit, char _terminate,
   size_t _length = 0;
   do {
     uint16_t _busy = usart->BAUD;
-    while (bit_is_clear(usart->STATUS, USART_RXCIF_bp)) {
+    while
+  #if defined(AVR_AVRLX)
+    (bit_is_clear(usart->INTFLAGS, USART_RXC_bp))
+  #else
+    (bit_is_clear(usart->STATUS, USART_RXCIF_bp))
+  #endif
+    {
       if (--_busy == 0) return _length;
     }
   #if defined(EVSYS_SWEVENTA)

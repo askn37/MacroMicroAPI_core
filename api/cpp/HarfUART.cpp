@@ -17,12 +17,20 @@
 #include <util/atomic.h>
 
 HarfUART_Class& HarfUART_Class::initiate (const uint16_t _baudrate) {
-  uint8_t _usart_ctrl_b = USART_RXEN_bm | USART_TXEN_bm;
   uint8_t _baud2x = 0;
+#if defined(AVR_AVRLX)
+  uint8_t _usart_ctrl_c = 0;
+  if (_baudrate <= 63) {
+    _baud2x = 1;
+    _usart_ctrl_c = USART_SAMPR_bm;
+  }
+#else
+  uint8_t _usart_ctrl_b = USART_RXEN_bm | USART_TXEN_bm;
   if (_baudrate <= 63) {
     _baud2x = 1;
     _usart_ctrl_b = USART_RXEN_bm | USART_TXEN_bm | USART_RXMODE_CLK2X_gc;
   }
+#endif
   const UART_portmux_t* _mux = portmux;
   register8_t *_portmux = (register8_t*)pgm_read_ptr(&_mux->portmux_reg);
   *_portmux = (*_portmux & pgm_read_byte(&_mux->portmux_mask))
@@ -34,18 +42,32 @@ HarfUART_Class& HarfUART_Class::initiate (const uint16_t _baudrate) {
                                                     | PORT_ISC_INTDISABLE_gc;
   USART_t* _usart = usart;
   _usart->BAUD = (_baudrate << _baud2x);
+#if defined(AVR_AVRLX)
+  _usart->CTRLD =+ USART_CHSIZE_8BIT_gc
+                 | USART_PMODE_DISABLED_gc
+                 | USART_SBMODE_1BIT_gc;
+  _usart->CTRLC = _usart_ctrl_c;
+  _usart->CTRLB =  USART_RXEN_bm | USART_TXEN_bm;
+  _usart->CTRLA =+ USART_CSIG_NORMAL_gc
+                 | USART_CMODE_ASYNCHRONOUS_gc
+                 | USART_ENABLE_bm;
+#else
   _usart->CTRLA = 0;
   _usart->CTRLC =+ USART_CHSIZE_8BIT_gc
                  | USART_PMODE_DISABLED_gc
                  | USART_CMODE_ASYNCHRONOUS_gc
                  | USART_SBMODE_1BIT_gc;
   _usart->CTRLB = _usart_ctrl_b;
+#endif
   return *this;
 }
 
 void HarfUART_Class::end (void) {
   flush();
   const UART_portmux_t* _mux = portmux;
+#if defined(AVR_AVRLX)
+  usart->CTRLA = 0;
+#endif
   usart->CTRLB = 0;
   (*(PORT_t*)pgm_read_ptr(&_mux->port_reg)).DIRCLR = pgm_read_byte(&_mux->tx_pin);
   (*(register8_t*)pgm_read_ptr(&_mux->rx_pin_ctrl)) = PORT_ISC_INPUT_DISABLE_gc;

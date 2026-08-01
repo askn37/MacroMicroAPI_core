@@ -14,6 +14,7 @@
 #include <avr/io.h>
 #if defined(__cplusplus) && !defined(__AVR_TINY__)
 
+#include <variant.h>
 #include "Print.h"
 
 class UsartBaseClass : public Print {
@@ -29,15 +30,27 @@ public:
   int read (void);
 
   void flush (void) {
+  #if defined(AVR_AVRLX)
+    loop_until_bit_is_set(usart->INTFLAGS, USART_TXC_bp);
+  #else
     loop_until_bit_is_set(usart->STATUS, USART_TXCIF_bp);
+  #endif
   }
 
   size_t available (void) {
+  #if defined(AVR_AVRLX)
+    return bit_is_set(usart->INTFLAGS, USART_RXC_bp) ? 1 : 0;
+  #else
     return bit_is_set(usart->STATUS, USART_RXCIF_bp) ? 1 : 0;
+  #endif
   }
 
   size_t availableForWrite (void) {
+  #if defined(AVR_AVRLX)
+    return bit_is_set(usart->INTFLAGS, USART_DRE_bp) ? 1 : 0;
+  #else
     return bit_is_set(usart->STATUS, USART_DREIF_bp) ? 1 : 0;
+  #endif
   }
 
   /* unsupported int peek() */
