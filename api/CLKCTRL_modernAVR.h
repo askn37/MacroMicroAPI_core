@@ -45,15 +45,16 @@
 
 extern inline void _CLKCTRL_SETUP (void) {
 
-#ifndef USB0_BUSEVENT_vect_num
-/* experimental overclock frequency */
-#ifndef CLKCTRL_FRQSEL_28M_gc
-#define CLKCTRL_FRQSEL_28M_gc (0x0A<<2)
-#endif
+#if !defined(USB0_BUSEVENT_vect_num) && !defined(CLKCTRL_CFD0_bp)
+  /* experimental overclock frequency */
+  /* This does not apply to AVR_DU and AVR_Sx famiry */
+  #ifndef CLKCTRL_FRQSEL_28M_gc
+    #define CLKCTRL_FRQSEL_28M_gc (0x0A<<2)
+  #endif
 
-#ifndef CLKCTRL_FRQSEL_32M_gc
-#define CLKCTRL_FRQSEL_32M_gc (0x0B<<2)
-#endif
+  #ifndef CLKCTRL_FRQSEL_32M_gc
+    #define CLKCTRL_FRQSEL_32M_gc (0x0B<<2)
+  #endif
 #endif /* USB0_BUSEVENT_vect_num */
 
 /*
