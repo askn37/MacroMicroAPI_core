@@ -2,10 +2,10 @@
  * @file CLKCTRL_modernAVR.h
  * @author askn (K.Sato) multix.jp
  * @brief CLKCTRL for modernAVR
- * @version 0.1
- * @date 2022-09-21
+ * @version 0.2
+ * @date 2026-08-04
  *
- * @copyright Copyright (c) 2024 askn37 at github.com
+ * @copyright Copyright (c) 2026 askn37 at github.com
  *
  */
 // MIT License : https://askn37.github.io/LICENSE.html
