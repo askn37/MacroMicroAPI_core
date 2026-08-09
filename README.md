@@ -38,6 +38,7 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
 |Arduino.h|[API種別選択ヘッダ](https://github.com/askn37/askn37.github.io/wiki/Micro_API#arduinoh)||✓|✓|✓
 |new.h|[C++ new/delete](https://github.com/askn37/askn37.github.io/wiki/Micro_API#newh)||✓|✓|
 |_api/_|
+|usrdef.h|[使用者定義設定](https://github.com/askn37/askn37.github.io/wiki/Micro_API#usrdefh)|✓|✓|✓|✓
 |CLKCTRL_megaAVR.h|[F_CPU初期化支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiclkctrl_h)（megaAVR/tinyAVR）|✓|✓
 |CLKCTRL_modernAVR.h|[F_CPU初期化支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiclkctrl_h)（modernAVR）|✓||✓
 |CLKCTRL_reduceAVR.h|[F_CPU初期化支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiclkctrl_h)（reduceAVR）|✓|||✓
