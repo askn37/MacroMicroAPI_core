@@ -332,6 +332,11 @@
 #define pinPosition(PIN) (PIN & 7)
 
 /*
+ * pinBitmask(PIN) macro
+ */
+#define pinBitmask(PIN) (1 << (PIN & 7))
+
+/*
  * portRegister(PIN) macro
  */
 #define portRegister(PIN) __CONCAT3(PORTREG_,PIN,_)
