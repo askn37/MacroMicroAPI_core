@@ -21,6 +21,7 @@ extern void setup (void);
 } // extern "C"
 #endif
 
+#if !defined(DWOSFILES) || (DWOSFILES != 1)
 __attribute__((OS_main,weak,used))
 int main (void) {
   initVariant();
@@ -28,5 +29,6 @@ int main (void) {
   setup();
   for (;;) loop();
 }
+#endif
 
 // end of code

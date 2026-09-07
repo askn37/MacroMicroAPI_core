@@ -61,6 +61,9 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
 
 ## 更新履歴
 
+- 0.4.9 (26/09/07)
+  - (reduceAVR) `TinyUART.h`と関連する修正
+
 - 0.4.6 (26/08/14)
   - `pinBitmask` マクロを追加
 
