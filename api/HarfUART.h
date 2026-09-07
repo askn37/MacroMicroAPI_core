@@ -28,7 +28,7 @@ public:
     UsartBaseClass(_usart), portmux(_portmux) {}
 
   inline HarfUART_Class& begin (const uint32_t _baudrate) {
-    return initiate((uint16_t)(((F_CPU / (_baudrate >> 3)) + 1) / 2));
+    return initiate((uint16_t)(F_CPU * 4 / _baudrate - 1));
   }
 
   HarfUART_Class & initiate (const uint16_t _baudrate);

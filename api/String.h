@@ -16,8 +16,18 @@
 #ifdef __cplusplus
 
 class PGM_t;
+
+#if defined(__AVR_TINY__)
+
+#define F(pmem_str) pmem_str
+#define P(pmem_ptr) pmem_ptr
+
+#else
+
 #define F(pmem_str) (reinterpret_cast<const PGM_t *>(PSTR(pmem_str)))
 #define P(pmem_ptr) (reinterpret_cast<const PGM_t *>(pmem_ptr))
+
+#endif
 
 #endif
 

@@ -74,70 +74,78 @@ struct TWI_portmux_t {
 typedef enum UART_BAUD_enum : uint16_t {
   UART_FAST = 32,
 
-#if (F_CPU >= 2400L) && (F_CPU < 4914900L)
-  UART_300     = (((F_CPU * 8) /     300) + 1) / 2,
-#elif (F_CPU >= 9600L) && (F_CPU < 19659600L)
-  UART_1200    = (((F_CPU * 8) /    1200) + 1) / 2,
+#if (F_CPU >= 2400L) && (F_CPU <= 4915200L)
+  UART_300     = F_CPU * 4 /     300 - 1,
+#elif (F_CPU >= 9600L) && (F_CPU <= 19660800L)
+  UART_1200    = F_CPU * 4 /    1200 - 1,
 #endif
 
-#if (F_CPU >= 19200L) && (F_CPU < 39319200L)
-  UART_2400    = (((F_CPU * 8) /    2400) + 1) / 2,
+#if (F_CPU >= 19200L) && (F_CPU <= 39321600L)
+  UART_2400    = F_CPU * 4 /    2400 - 1,
 #endif
 
 #if (F_CPU >= 38400L)
-  UART_4800    = (((F_CPU * 8) /    4800) + 1) / 2,
+  UART_4800    = F_CPU * 4 /    4800 - 1,
 #endif
 
 #if (F_CPU >= 76800L)
-  UART_9600    = (((F_CPU * 8) /    9600) + 1) / 2,
+  UART_9600    = F_CPU * 4 /    9600 - 1,
 #endif
 
 #if (F_CPU >= 153600L)
-  UART_19200   = (((F_CPU * 8) /   19200) + 1) / 2,
+  UART_19200   = F_CPU * 4 /   19200 - 1,
 #endif
 
 #if (F_CPU >= 278400L)
-  UART_38400   = (((F_CPU * 8) /   38400) + 1) / 2,
+  UART_38400   = F_CPU * 4 /   38400 - 1,
 #endif
 
 #if (F_CPU >= 460800L)
-  UART_57600   = (((F_CPU * 8) /   57600) + 1) / 2,
+  UART_57600   = F_CPU * 4 /   57600 - 1,
+#endif
+
+#if (F_CPU >= 800000L)
+  UART_100000  = F_CPU * 4 /  100000 - 1,
 #endif
 
 #if (F_CPU >= 921600L)
-  UART_115200  = (((F_CPU * 8) /  115200) + 1) / 2,
+  UART_115200  = F_CPU * 4 /  115200 - 1,
 #endif
 
 #if (F_CPU >= 1843200L)
-  UART_230400  = (((F_CPU * 8) /  230400) + 1) / 2,
+  UART_230400  = F_CPU * 4 /  230400 - 1,
+#endif
+
+#if (F_CPU >= 2000000L)
+  UART_250000  = F_CPU * 4 /  250000 - 1,
 #endif
 
 #if (F_CPU >= 3686400L)
-  UART_460800  = (((F_CPU * 8) /  460800) + 1) / 2,
+  UART_460800  = F_CPU * 4 /  460800 - 1,
 #endif
 
 #if (F_CPU >= 4000000L)
-  UART_500000  = (((F_CPU * 8) /  500000) + 1) / 2,
+  UART_500000  = F_CPU * 4 /  500000 - 1,
 #endif
 
 #if (F_CPU >= 8000000L)
-  UART_1000000 = (((F_CPU * 8) / 1000000) + 1) / 2,
+  UART_1000000 = F_CPU * 4 / 1000000 - 1,
 #endif
 
 #if (F_CPU >= 12000000L)
-  UART_1500000 = (((F_CPU * 8) / 1500000) + 1) / 2,
+  UART_1500000 = F_CPU * 4 / 1500000 - 1,
 #endif
 
 #if (F_CPU >= 16000000L)
-  UART_2000000 = (((F_CPU * 8) / 2000000) + 1) / 2,
+  UART_2000000 = F_CPU * 4 / 2000000 - 1,
 #endif
 
 #if (F_CPU >= 24000000L)
-  UART_3000000 = (((F_CPU * 8) / 3000000) + 1) / 2,
+  UART_3000000 = F_CPU * 4 / 3000000 - 1,
 #endif
 
 #if defined(CONSOLE_BAUD) && (F_CPU >= CONSOLE_BAUD * 8)
-  UART_CONSOLE_BAUD = (((F_CPU * 8) / CONSOLE_BAUD) + 1) / 2,
+  UART_CONSOLE_BAUD = F_CPU * 4 / CONSOLE_BAUD - 1,
 #elif (F_CPU < 4800L)
   UART_CONSOLE_BAUD = UART_300,
 #elif (F_CPU < 19200L)

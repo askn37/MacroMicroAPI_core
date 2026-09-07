@@ -43,7 +43,7 @@
   #warning F_CPU is undefined so assume 4000000L
 #endif
 
-extern inline void _CLKCTRL_SETUP (void) {
+extern inline void _CLKCTRL_SETUP (const uint8_t _oschf_gm = 0) {
 
 #if !defined(USB0_BUSEVENT_vect_num) && !defined(CLKCTRL_CFD0_bp)
   /* experimental overclock frequency */
@@ -83,7 +83,8 @@ extern inline void _CLKCTRL_SETUP (void) {
 #elif (F_CPU == 8000000L)
   #define _CLKCTRL_FREQSEL_ CLKCTRL_FRQSEL_8M_gc
 #elif (F_CPU == 4000000L)
-  #define _CLKCTRL_FREQSEL_ CLKCTRL_FRQSEL_4M_gc
+  /* Omitted because it is the same as the default value. */
+  // #define _CLKCTRL_FREQSEL_ CLKCTRL_FRQSEL_4M_gc
 #elif (F_CPU == 2000000L)
   #define _CLKCTRL_FREQSEL_ CLKCTRL_FRQSEL_2M_gc
 #elif (F_CPU == 1000000L)
@@ -299,7 +300,11 @@ extern inline void _CLKCTRL_SETUP (void) {
 #endif
 
 #if defined(_CLKCTRL_FREQSEL_)
-  _PROTECTED_WRITE(CLKCTRL_OSCHFCTRLA, _CLKCTRL_FREQSEL_);
+  _PROTECTED_WRITE(CLKCTRL_OSCHFCTRLA, _CLKCTRL_FREQSEL_ | _oschf_gm);
+#else
+  if (_oschf_gm) {
+    _PROTECTED_WRITE(CLKCTRL_OSCHFCTRLA, _oschf_gm);
+  }
 #endif
 
 #if defined(CLKCTRL_USED_OSC32K)
@@ -311,7 +316,8 @@ extern inline void _CLKCTRL_SETUP (void) {
 #if defined(_CLKCTRL_PDIV_)
   _PROTECTED_WRITE(CLKCTRL_MCLKCTRLB, _CLKCTRL_PDIV_ | CLKCTRL_PEN_bm);
 #else
-  _PROTECTED_WRITE(CLKCTRL_MCLKCTRLB, 0);
+  /* The default value for this family is `0`, so it is omitted. */
+  // _PROTECTED_WRITE(CLKCTRL_MCLKCTRLB, 0);
 #endif
 
   // loop_until_bit_is_clear(CLKCTRL.MCLKSTATUS, CLKCTRL_SOSC_bp);
@@ -348,7 +354,7 @@ extern inline void _CLKCTRL_SETUP (void) {
   #warning F_CPU is undefined so assume 2000000L
 #endif
 
-extern inline void _CLKCTRL_SETUP (void) {
+extern inline void _CLKCTRL_SETUP (const uint8_t _oschf_gm = 0) {
 
 /* CLK_MAIN = 20MHz or 16MHz type */
 #if   (F_CPU == 20000000L) || (F_CPU == 16000000L)
@@ -432,6 +438,10 @@ extern inline void _CLKCTRL_SETUP (void) {
   // _PROTECTED_WRITE(CLKCTRL.MCLKCTRLA, CLKCTRL_CLKSEL_OSCHF_gc);
 
 #else
+
+  if (_oschf_gm) {
+    _PROTECTED_WRITE(CLKCTRL_OSCHFCTRLA, _oschf_gm);
+  }
 
   #if defined(_CLKCTRL_PDIV_)
   _PROTECTED_WRITE(CLKCTRL_MCLKCTRLB, _CLKCTRL_PDIV_ | CLKCTRL_PEN_bm);
