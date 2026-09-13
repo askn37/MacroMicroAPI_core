@@ -33,33 +33,37 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
 
 ## 収容ライブラリ
 
-|名称|機能|C|mega|modern|reduce|
-|-|-|-|-|-|-|
-|Arduino.h|[API種別選択ヘッダ](https://github.com/askn37/askn37.github.io/wiki/Micro_API#arduinoh)||✓|✓|✓
-|new.h|[C++ new/delete](https://github.com/askn37/askn37.github.io/wiki/Micro_API#newh)||✓|✓|
-|_api/_|
-|usrdef.h|[使用者定義設定](https://github.com/askn37/askn37.github.io/wiki/Micro_API#usrdefh)|✓|✓|✓|✓
-|CLKCTRL_megaAVR.h|[F_CPU初期化支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiclkctrl_h)（megaAVR/tinyAVR）|✓|✓
-|CLKCTRL_modernAVR.h|[F_CPU初期化支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiclkctrl_h)（modernAVR）|✓||✓
-|CLKCTRL_reduceAVR.h|[F_CPU初期化支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiclkctrl_h)（reduceAVR）|✓|||✓
-|HarfUART.h|[半二重非同期UARTクラス](https://github.com/askn37/askn37.github.io/wiki/HarfUART)||✓|✓
-|Portmux.h|[外部端子割付代替支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiportmuxh)||✓|✓
-|Print.h|[Printクラス](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiprinth)||✓|✓
-|String.h|[PGMEM補助クラス](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apistringh)||✓|✓
-|TWIM.h|[二線式接続(I2C)主装置クラス](https://github.com/askn37/askn37.github.io/wiki/TWIM)||✓|✓
-|UsartBaseClass.h|[USART周辺機能支援クラス](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiusartbaseclassh)||✓|✓
-|btools.h|[基本データ処理支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apibtoolsh)|✓|✓|✓|✓
-|capsule.h|[カプセル変数共有体](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apicapsuleh)|✓|✓|✓|✓
-|delay_busywait.h|[遅延時間待機支援](https://github.com/askn37/askn37.github.io/wiki/Macro_API#apidelay_busywaith)|✓|✓|✓|✓
-|macro_api.h|[MacroAPI](https://github.com/askn37/askn37.github.io/wiki/Macro_API#apimacro_apih)|✓|✓|✓|✓
-|macro_digital.h|[外部端子操作マクロ](https://github.com/askn37/askn37.github.io/wiki/Macro_API#apimacro_digitalh)|✓|✓|✓|\*
-|memspace.h|[拡張メモリ属性](https://github.com/askn37/askn37.github.io/wiki/Macro_API#apimemspaceh)|✓|✓|✓|✓
-|power.h|[CPU休止制御支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apipowerh)|✓|✓|✓|✓
+| 名称                | 機能                                                                                                         | C   | mega | modern | reduce |
+| ------------------- | ------------------------------------------------------------------------------------------------------------ | --- | ---- | ------ | ------ |
+| Arduino.h           | [API種別選択ヘッダ](https://github.com/askn37/askn37.github.io/wiki/Micro_API#arduinoh)                      |     | ✓   | ✓     | ✓     |
+| new.h               | [C++ new/delete](https://github.com/askn37/askn37.github.io/wiki/Micro_API#newh)                             |     | ✓   | ✓     |        |
+| _api/_              |                                                                                                              |     |      |        |        |
+| usrdef.h            | [使用者定義設定](https://github.com/askn37/askn37.github.io/wiki/Micro_API#usrdefh)                          | ✓  | ✓   | ✓     | ✓     |
+| CLKCTRL_megaAVR.h   | [F_CPU初期化支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiclkctrl_h)（megaAVR/tinyAVR） | ✓  | ✓   |        |        |
+| CLKCTRL_modernAVR.h | [F_CPU初期化支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiclkctrl_h)（modernAVR）       | ✓  |      | ✓     |        |
+| CLKCTRL_reduceAVR.h | [F_CPU初期化支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiclkctrl_h)（reduceAVR）       | ✓  |      |        | ✓     |
+| CVT.h               | [FreeStanding/CVT作成支援](https://github.com/askn37/askn37.github.io/wiki/CVT)                              | ✓  | ✓   | ✓     |        |
+| HarfUART.h          | [半二重非同期UARTクラス](https://github.com/askn37/askn37.github.io/wiki/HarfUART)                           |     | ✓   | ✓     |        |
+| Portmux.h           | [外部端子割付代替支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiportmuxh)                |     | ✓   | ✓     |        |
+| Print.h             | [Printクラス](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiprinth)                           |     | ✓   | ✓     |        |
+| String.h            | [PGMEM補助クラス](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apistringh)                      |     | ✓   | ✓     |        |
+| TWIM.h              | [二線式接続(I2C)主装置クラス](https://github.com/askn37/askn37.github.io/wiki/TWIM)                          |     | ✓   | ✓     |        |
+| UsartBaseClass.h    | [USART周辺機能支援クラス](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apiusartbaseclassh)      |     | ✓   | ✓     |        |
+| btools.h            | [基本データ処理支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apibtoolsh)                   | ✓  | ✓   | ✓     | ✓     |
+| capsule.h           | [カプセル変数共有体](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apicapsuleh)                  | ✓  | ✓   | ✓     | ✓     |
+| delay_busywait.h    | [遅延時間待機支援](https://github.com/askn37/askn37.github.io/wiki/Macro_API#apidelay_busywaith)             | ✓  | ✓   | ✓     | ✓     |
+| macro_api.h         | [MacroAPI](https://github.com/askn37/askn37.github.io/wiki/Macro_API#apimacro_apih)                          | ✓  | ✓   | ✓     | ✓     |
+| macro_digital.h     | [外部端子操作マクロ](https://github.com/askn37/askn37.github.io/wiki/Macro_API#apimacro_digitalh)            | ✓  | ✓   | ✓     | \*     |
+| memspace.h          | [拡張メモリ属性](https://github.com/askn37/askn37.github.io/wiki/Macro_API#apimemspaceh)                     | ✓  | ✓   | ✓     | ✓     |
+| power.h             | [CPU休止制御支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apipowerh)                       | ✓  | ✓   | ✓     | ✓     |
 
 > Cカテゴリは純粋C言語環境でも機能する。\
 > reduceAVR の macro_digital 機能は variants パスに配置。
 
 ## 更新履歴
+
+- 0.4.10 (26/09/11)
+  - 機能追加: `api/CVT.h` [FreeStanding/CVT作成支援]
 
 - 0.4.9 (26/09/07)
   - (reduceAVR) `TinyUART.h`と関連する修正
