@@ -64,6 +64,7 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
 
 - 0.4.10 (26/09/11)
   - 機能追加: `api/CVT.h` [FreeStanding/CVT作成支援]
+  - 修正: `_CLKCTRL_SETUP`
 
 - 0.4.9 (26/09/07)
   - (reduceAVR) `TinyUART.h`と関連する修正
