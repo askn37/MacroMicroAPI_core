@@ -20,7 +20,12 @@
   #warning F_CPU is undefined so assume 1000000L
 #endif
 
-extern inline void _CLKCTRL_SETUP (void) {
+#ifdef __cplusplus
+extern "C" inline void _CLKCTRL_SETUP (void)
+#else
+extern inline void _CLKCTRL_SETUP (void)
+#endif
+{
 
 #if (F_CPU == 8000000L)
   #define _CLKCTRL_PDIV_ CLKCTRL_PDIV_1X_gc

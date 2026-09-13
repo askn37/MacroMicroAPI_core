@@ -41,7 +41,12 @@
   #warning F_CPU is undefined so assume 2000000L
 #endif
 
-extern inline void _CLKCTRL_SETUP (void) {
+#ifdef __cplusplus
+extern "C" inline void _CLKCTRL_SETUP (void)
+#else
+extern inline void _CLKCTRL_SETUP (void)
+#endif
+{
 
 /* CLK_MAIN = 20MHz or 16MHz type */
 #if   (F_CPU == 20000000L) || (F_CPU == 16000000L)

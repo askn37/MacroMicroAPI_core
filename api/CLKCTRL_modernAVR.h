@@ -43,7 +43,15 @@
   #warning F_CPU is undefined so assume 4000000L
 #endif
 
-extern inline void _CLKCTRL_SETUP (const uint8_t _oschf_gm = 0) {
+#ifdef __cplusplus
+extern "C" inline void _CLKCTRL_SETUP (const uint8_t _oschf_gm = 0)
+#else
+extern inline void _CLKCTRL_SETUP (void)
+  #ifndef _oschf_gm
+    #define _oschf_gm 0
+  #endif
+#endif
+{
 
 #if !defined(USB0_BUSEVENT_vect_num) && !defined(CLKCTRL_CFD0_bp)
   /* experimental overclock frequency */
@@ -354,7 +362,15 @@ extern inline void _CLKCTRL_SETUP (const uint8_t _oschf_gm = 0) {
   #warning F_CPU is undefined so assume 2000000L
 #endif
 
-extern inline void _CLKCTRL_SETUP (const uint8_t _oschf_gm = 0) {
+#ifdef __cplusplus
+extern "C" inline void _CLKCTRL_SETUP (const uint8_t _oschf_gm = 0)
+#else
+extern inline void _CLKCTRL_SETUP (void)
+  #ifndef _oschf_gm
+    #define _oschf_gm 0
+  #endif
+#endif
+{
 
 /* CLK_MAIN = 20MHz or 16MHz type */
 #if   (F_CPU == 20000000L) || (F_CPU == 16000000L)
