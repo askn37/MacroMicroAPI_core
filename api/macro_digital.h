@@ -2,13 +2,12 @@
  * @file macro_digital.h
  * @author askn (K.Sato) multix.jp
  * @brief Macro/Micro API digital pin control
- * @version 0.1
- * @date 2022-09-21
- *
- * @copyright Copyright (c) 2024 askn37 at github.com
- *
+ * @version 0.2
+ * @date 2026-09-16
+ * @copyright Copyright (c) 2026 askn37 at github.com
+ * @link Product Potal : https://askn37.github.io/
+ *         MIT License : https://askn37.github.io/LICENSE.html
  */
-// MIT License : https://askn37.github.io/LICENSE.html
 
 #pragma once
 #include <avr/io.h>
@@ -21,6 +20,13 @@
 #else
 
 /* MACRO API */
+
+#ifdef __CONCAT2
+#undef __CONCAT2
+#endif
+#ifndef __CONCAT2
+#define __CONCAT2(A,B) A##B
+#endif
 
 #ifdef __CONCAT3
 #undef __CONCAT3
@@ -335,6 +341,14 @@
  * pinBitmask(PIN) macro
  */
 #define pinBitmask(PIN) (1 << (PIN & 7))
+
+/*
+ * pinInverted(PIN,[LOW|HIGH|TOGGLE]) macro
+ */
+#define PININV_0_(REG) (REG &= ~PORT_INVEN_bm)
+#define PININV_251_(REG) (REG ^= PORT_INVEN_bm)
+#define PININV_254_(REG) (REG |= PORT_INVEN_bm)
+#define pinInverted(PIN,DIR) (__CONCAT3(PININV_,DIR,_)(pinControlRegister(PIN)))
 
 /*
  * portRegister(PIN) macro

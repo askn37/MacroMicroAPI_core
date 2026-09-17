@@ -2,13 +2,12 @@
  * @file macro_api.h
  * @author askn (K.Sato) multix.jp
  * @brief Macro/Micro API top header
- * @version 0.1
- * @date 2022-09-21
- *
- * @copyright Copyright (c) 2024 askn37 at github.com
- *
+ * @version 0.2
+ * @date 2026-09-16
+ * @copyright Copyright (c) 2026 askn37 at github.com
+ * @link Product Potal : https://askn37.github.io/
+ *         MIT License : https://askn37.github.io/LICENSE.html
  */
-// MIT License : https://askn37.github.io/LICENSE.html
 
 #pragma once
 #if defined(ENABLE_MACRO_API) && !defined(DISABLE_MACRO_API)
@@ -21,6 +20,7 @@
 #include <inttypes.h>
 #include <stdbool.h>
 #include <api/btools.h>
+#include <api/capsule.h>
 #include <api/delay_busywait.h>
 #include <api/macro_digital.h>
 #include <api/memspace.h>
@@ -65,6 +65,14 @@
 
 #if !defined(nop) && !defined(DISABLE_ALIAS_NOP)
   #define nop() __builtin_avr_nop()
+#endif
+
+#if !defined(nops) && !defined(DISABLE_ALIAS_NOPS)
+  #define nops(N) __builtin_avr_nops(N)
+#endif
+
+#if !defined(swap) && !defined(DISABLE_ALIAS_SWAP)
+  #define swap(R) __builtin_avr_swap(R)
 #endif
 
 #if !defined(wdt_reset) && !defined(DISABLE_ALIAS_WDR_RESET)
