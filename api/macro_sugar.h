@@ -59,7 +59,7 @@ typedef enum CLKCTRL_CLKSEL_ALT_enum
 #endif
 
 #ifdef __MSS_CLKSEL_TINY01__
-/* tinyAVR-0/1/2, megaAVR-0 style */
+/* tinyAVR-2, AVR_Dx/Ex/Lx/Sx style */
   #if !defined (__ASSEMBLER__)
 /* Clock Select */
 typedef enum TCB_CLKSEL_ALT_enum
