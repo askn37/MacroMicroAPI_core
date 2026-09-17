@@ -21,18 +21,18 @@
 #define CVT_LVL0
 #endif
 
-#if defined(CVT_NVM) ||  defined(CVT_LVL1) || defined(CVT_LVL0)
+#if defined(CVT_NVM) || defined(CVT_LVL1) || defined(CVT_LVL0)
 
   #define LVL1_vect _VECTOR(2)
   #define LVL0_vect _VECTOR(3)
 
 #ifdef __cplusplus
-  extern "C" void _startup (void) __attribute__ ((naked,used));
+  extern "C" void _startup (void) __attribute__ ((__naked__,__used__));
   extern "C" void __vector_1 (void);
   extern "C" void __vector_2 (void);
   extern "C" void __vector_3 (void);
 #else
-  extern void _startup (void) __attribute__ ((naked,used));
+  extern void _startup (void) __attribute__ ((__naked__,__used__));
   extern void __vector_1 (void);
   extern void __vector_2 (void);
   extern void __vector_3 (void);
@@ -40,7 +40,7 @@
 
 #define __QUOTE__(S) #S
 #define _BALIGN_(S) ".balign " __QUOTE__(S) "\n" 
-__attribute__ ((naked,used,section(".vectors")))
+__attribute__ ((__naked__,used,section(".vectors")))
 static void __CVTABLES__ (void) {
   __asm__ __volatile__ (
     _BALIGN_(_VECTOR_SIZE)
@@ -74,7 +74,7 @@ static void __CVTABLES__ (void) {
 
 #else
 
-#define FREESTANDING_STARTUP(...) __attribute__ ((naked,used,section(".vectors"))) __VA_ARGS__ static void _startup (void)
+#define FREESTANDING_STARTUP(...) __attribute__ ((__naked__,__used__,section(".vectors"))) __VA_ARGS__ static void _startup (void)
 
 #endif
 

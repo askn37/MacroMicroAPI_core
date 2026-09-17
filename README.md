@@ -54,6 +54,7 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
 | delay_busywait.h    | [遅延時間待機支援](https://github.com/askn37/askn37.github.io/wiki/Macro_API#apidelay_busywaith)             | ✓  | ✓   | ✓     | ✓     |
 | macro_api.h         | [MacroAPI](https://github.com/askn37/askn37.github.io/wiki/Macro_API#apimacro_apih)                          | ✓  | ✓   | ✓     | ✓     |
 | macro_digital.h     | [外部端子操作マクロ](https://github.com/askn37/askn37.github.io/wiki/Macro_API#apimacro_digitalh)            | ✓  | ✓   | ✓     | \*     |
+| macro_sugar.h       | [糖衣構文マクロ](https://github.com/askn37/askn37.github.io/wiki/SyntaxSugar)                                | ✓  | ✓   | ✓     |        |
 | memspace.h          | [拡張メモリ属性](https://github.com/askn37/askn37.github.io/wiki/Macro_API#apimemspaceh)                     | ✓  | ✓   | ✓     | ✓     |
 | power.h             | [CPU休止制御支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apipowerh)                       | ✓  | ✓   | ✓     | ✓     |
 | 名称                | 機能                                                                                                         | C   | mega | modern | reduce |
@@ -80,13 +81,14 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
 | memspace.h          | [拡張メモリ属性](https://github.com/askn37/askn37.github.io/wiki/Macro_API#apimemspaceh)                     | ✓  | ✓   | ✓     | ✓     |
 | power.h             | [CPU休止制御支援](https://github.com/askn37/askn37.github.io/wiki/Micro_API#apipowerh)                       | ✓  | ✓   | ✓     | ✓     |
 
-> Cカテゴリは純粋C言語環境でも機能する。\
-> reduceAVR の macro_digital 機能は variants パスに配置。
+- Cカテゴリは純粋C言語環境でも機能する。
+* \* reduceAVR の macro_digital 機能は variants パスに配置。
 
 ## 更新履歴
 
 - 0.4.10 (26/09/11)
   - 機能追加: `api/CVT.h` [FreeStanding/CVT作成支援]
+  - 機能追加: `pinInverted(PIN,DIR)` (MacroAPI)
   - 修正: `_CLKCTRL_SETUP`
 
 - 0.4.9 (26/09/07)
