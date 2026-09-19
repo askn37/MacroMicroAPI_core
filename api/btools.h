@@ -46,6 +46,7 @@ extern uint8_t stob (char _s[]);
 
 extern short map_short (short x, short in_min, short in_max, short out_min, short out_max);
 extern long map_long (long x, long in_min, long in_max, long out_min, long out_max);
+extern double map_double (double x, double in_min, double in_max, double out_min, double out_max);
 
 extern uint8_t csm8 (void* _data, size_t _len);           /* byte CheckSuM (ADD) */
 extern uint8_t bcc8 (void* _data, size_t _len);           /* Byte Check Code (XOR) */
