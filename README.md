@@ -86,9 +86,10 @@ AVR-GCC / AVR-LIBC 専用。__Arduino互換API用ではない。__
 
 ## 更新履歴
 
-- 0.4.10 (26/09/11)
+- 0.4.10 (26/09/19)
   - 機能追加: `api/CVT.h` [FreeStanding/CVT作成支援]
-  - 機能追加: `pinInverted(PIN,DIR)` (MacroAPI)
+  - 機能追加: `pinInverted(PIN,DIR)` (Macro_API)
+  - 機能追加: `map_double(...)` (Micro_API)
   - 修正: `_CLKCTRL_SETUP`
 
 - 0.4.9 (26/09/07)
