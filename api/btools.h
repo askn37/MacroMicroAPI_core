@@ -24,7 +24,12 @@
 #define _PTR32(p) ((uint32_t*)&(p))
 #define _PTR64(p) ((uint64_t*)&(p))
 
-#define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
+#define constrain(amt,low,high) ({ \
+  __typeof__(amt)  _amt  = (amt);  \
+  __typeof__(low)  _low  = (low);  \
+  __typeof__(high) _high = (high); \
+  (_amt < _low ) ? (_low) : ((_amt > _high) ? _high : _amt); \
+})
 
 #ifdef __cplusplus
 extern "C" {
