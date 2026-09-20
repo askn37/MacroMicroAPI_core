@@ -24,7 +24,12 @@
 #define _PTR32(p) ((uint32_t*)&(p))
 #define _PTR64(p) ((uint64_t*)&(p))
 
-#define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
+#define constrain(amt,low,high) ({ \
+  __typeof__(amt)  _amt  = (amt);  \
+  __typeof__(low)  _low  = (low);  \
+  __typeof__(high) _high = (high); \
+  (_amt < _low ) ? (_low) : ((_amt > _high) ? _high : _amt); \
+})
 
 #ifdef __cplusplus
 extern "C" {
@@ -46,6 +51,7 @@ extern uint8_t stob (char _s[]);
 
 extern short map_short (short x, short in_min, short in_max, short out_min, short out_max);
 extern long map_long (long x, long in_min, long in_max, long out_min, long out_max);
+extern double map_double (double x, double in_min, double in_max, double out_min, double out_max);
 
 extern uint8_t csm8 (void* _data, size_t _len);           /* byte CheckSuM (ADD) */
 extern uint8_t bcc8 (void* _data, size_t _len);           /* Byte Check Code (XOR) */

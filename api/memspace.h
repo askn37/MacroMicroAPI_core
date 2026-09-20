@@ -38,6 +38,8 @@
 
 #define PGM_ALIGN alignas(PROGMEM_PAGE_SIZE)
 
+#define _MemoryBarrier() __asm__ __volatile__("":::"memory")
+
 /*
  * IMPORT_BINFILE macro example
  *
