@@ -36,6 +36,9 @@
 #define USERSIG __attribute__((__used__,section(".user_signatures")))
 #define BOOTSIG __attribute__((__used__,section(".boot_signatures")))
 
+#define NOINLINE __attribute__((__noinline__))
+#define NORETURN __attribute__((__noreturn__))
+
 #define PGM_ALIGN alignas(PROGMEM_PAGE_SIZE)
 
 #define _MemoryBarrier() __asm__ __volatile__("":::"memory")
